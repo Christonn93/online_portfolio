@@ -6,7 +6,7 @@ import Brightness3Icon from "@mui/icons-material/Brightness3";
 
 type Props = {
  toggler: () => void;
- mode: boolean;
+ mode: string;
 };
 
 class Header extends Component<Props> {
@@ -14,7 +14,7 @@ class Header extends Component<Props> {
 
  render() {
   const { toggler, mode } = this.props;
-  const isDarkMode = mode === false;
+  const isDarkMode = mode === "dark";
 
   return (
    <Box

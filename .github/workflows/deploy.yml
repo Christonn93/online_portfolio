@@ -1,33 +1,44 @@
-name: Build and Deploy
+name: Deploy static content to Pages
 
 on:
   push:
-    branches:
-      - main # or the branch you want to trigger the build on
+    branches: ["main"]  # Trigger on push to main branch
+  workflow_dispatch:  # Allows manual triggering
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16' # Use the version of Node.js you need
-
       - name: Install dependencies
-        run: npm install
+        run: npm install  # Installs Vite and project dependencies
 
-      - name: Build the project
-        run: npm run build # or `yarn build` if you use Yarn
+      - name: Build project
+        run: npm run build  # Builds the Vite project (output in `dist` folder by default)
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Upload built project
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'dist'  # Upload the `dist` directory, Vite's default build output folder
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages # The branch to deploy to
-          folder: build # The folder containing the built files
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: deployment
+        uses: actions/deploy-pages@v2
