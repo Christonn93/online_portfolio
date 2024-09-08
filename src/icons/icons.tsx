@@ -1,5 +1,3 @@
-// Aesthetic Icons
-
 export const Embedded = () => {
  return (
   <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 20 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" className="text-2xl text-accent">
@@ -142,12 +140,12 @@ export const EmailIcon = () => {
  );
 };
 
-export const CosmicLogo = ({ width, height }) => {
+export const CosmicLogo = () => {
  const iconColor = "fill-[#29abe2]";
  return (
   <svg
-   width={width ?? "135"}
-   height={height ?? "29"}
+   width="135"
+   height="29"
    viewBox="0 0 135 29"
    fill="none"
    xmlns="http://www.w3.org/2000/svg"

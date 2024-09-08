@@ -1,9 +1,6 @@
 import "./style/App.css";
-import { Box, Container, CssBaseline, ThemeProvider, Typography } from "@mui/material";
+import { Box, Container, CssBaseline, ThemeProvider } from "@mui/material";
 
-import { LetterIcon } from "./icons/icons";
-
-import SectionComponent from "./components/SectionComponent";
 import Header from "./components/Header";
 import { useState } from "react";
 import { lightTheme, darkTheme } from "./style/theme";

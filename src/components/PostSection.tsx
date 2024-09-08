@@ -5,12 +5,7 @@ import DataObjectIcon from "@mui/icons-material/DataObject";
 import Post from "./Post";
 import { Project } from "../types/ProjectTypes";
 
-type ProjectCardProps = {
- project: Project;
- index: number;
-};
-
-const PostSection: React.FC<ProjectCardProps> = () => {
+const PostSection: React.FC = () => {
  const { data: projects = [], isLoading, error } = useProjects();
 
  if (isLoading) return <p>Loading...</p>;
